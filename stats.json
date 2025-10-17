@@ -1,0 +1,107 @@
+{
+  "totalVideos": 0,
+  "totalDownloads": 17,
+  "uniqueIPs": [],
+  "names": {
+    "Test User": 1,
+    "BURAK": 6,
+    "MELİKE": 1,
+    "SAMED": 2,
+    "HACI": 1,
+    "DAVUT": 1,
+    "GAYE": 1,
+    "HALE": 1,
+    "TARIK": 1,
+    "VELİ": 1,
+    "YAKUP": 1
+  },
+  "activities": [
+    {
+      "timestamp": "2025-10-15T16:16:10.097Z",
+      "name": "Test User",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-15T16:16:28.771Z",
+      "name": "BURAK",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-15T16:18:08.051Z",
+      "name": "MELİKE",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-15T16:49:20.294Z",
+      "name": "SAMED",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-15T18:44:18.874Z",
+      "name": "BURAK",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-15T19:44:18.115Z",
+      "name": "BURAK",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-16T16:13:30.048Z",
+      "name": "HACI",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-16T16:20:24.253Z",
+      "name": "DAVUT",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-16T16:32:41.674Z",
+      "name": "BURAK",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-17T06:37:06.222Z",
+      "name": "GAYE",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-17T06:41:12.399Z",
+      "name": "HALE",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-17T06:44:00.259Z",
+      "name": "TARIK",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-17T07:07:35.291Z",
+      "name": "BURAK",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-17T07:20:32.620Z",
+      "name": "VELİ",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-17T07:25:12.718Z",
+      "name": "BURAK",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-17T07:27:53.158Z",
+      "name": "SAMED",
+      "action": "Video İndirildi"
+    },
+    {
+      "timestamp": "2025-10-17T07:32:24.772Z",
+      "name": "YAKUP",
+      "action": "Video İndirildi"
+    }
+  ],
+  "hourlyStats": {},
+  "dailyStats": {}
+}

@@ -1,0 +1,68 @@
+html,body,#root{height:100%;margin:0;padding:0;background:#0b0b0b;color:#fff;font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; background: url(../public/bg.webp); background-size: cover; background-position: center; background-repeat: no-repeat;background-attachment: fixed;}
+*{font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; box-sizing: border-box;}
+.app{display:flex;height:100%;flex-direction:column;align-items: flex-end;}
+.left{width:500px;padding:12px;display:flex;flex-direction:column;gap:8px;align-items:center;box-sizing: border-box; height: 100vh;justify-content:center; margin-right:150px;}
+.preview{flex:1;display:flex;align-items:center;justify-content:center;padding:20px; width: 500px; margin-right: 50px;}
+.preview-wrapper{position:relative;width:100%;max-width:360px;height:640px;background:#000;border-radius:8px;overflow:hidden; margin:auto;}
+.preview-wrapper video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+.preview-wrapper canvas{position:absolute;inset:0;width:100%;height:100%;z-index:2;cursor:default;}
+.preview-wrapper canvas:active{cursor:default;}
+.row{display:flex;gap:8px;justify-content:center;width:100%;}
+input{padding:12px 16px;background:#ffffff1c;border:1px solid #333;color:#fff;border-radius:6px;font-size:14px;width:100%;max-width:300px;text-align:center;}
+button{cursor:pointer;min-width:200px;font-weight:500;transition:all 0.3s ease;}
+button:disabled{opacity:0.5;cursor:not-allowed;}
+input::placeholder {color: #fff;}
+.logo {position: relative; text-align: right; width: 100%; margin-top: 40px;}
+.logo img {width: 100px;}
+
+/* Loading spinner animasyonu */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mobil uyumluluk */
+@media (max-width: 768px) {
+  html,body,#root{background:#0b0b0b;background: #000a12 url(../public/mobil_bg.webp); background-size: cover; background-position: top center; background-repeat: no-repeat;background-attachment:inherit;}
+  .app{flex-direction:column;}
+  .left{width:100%;padding:16px;border-right:none;margin-right:0px; justify-content: flex-start;margin-top: 250px;}
+  .preview{padding:16px; width: 100%; margin-right: 0px;}
+  .preview-wrapper{width:100%;}
+  input{padding:14px 18px;font-size:16px;}
+  button{padding:16px 24px;font-size:16px;min-width:100%;}
+  .row{flex-direction:column;gap:12px;}
+  .logo {position: relative; text-align: center; width: 100%; margin-top: 40px;}
+}
+
+/* Font loading for 3D text - ensure fonts are loaded */
+.font-poppins { font-family: 'Poppins', Arial, sans-serif; }
+.font-roboto { font-family: 'Roboto', Arial, sans-serif; }
+.font-open-sans { font-family: 'Open Sans', Arial, sans-serif; }
+.font-lato { font-family: 'Lato', Arial, sans-serif; }
+.font-montserrat { font-family: 'Montserrat', Arial, sans-serif; }
+.font-source-sans-pro { font-family: 'Source Sans Pro', Arial, sans-serif; }
+.font-oswald { font-family: 'Oswald', Arial, sans-serif; }
+.font-playfair-display { font-family: 'Playfair Display', 'Times New Roman', serif; }
+.font-merriweather { font-family: 'Merriweather', 'Times New Roman', serif; }
+.font-pt-sans { font-family: 'PT Sans', Arial, sans-serif; }
+
+/* Font preloading for 3D text */
+.font-preload {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  visibility: hidden;
+  font-family: 'Poppins', 'Roboto', 'Open Sans', 'Lato', 'Montserrat', 'Source Sans Pro', 'Oswald', 'Playfair Display', 'Merriweather', 'PT Sans', Arial, sans-serif;
+}
+
+canvas {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+#threeCanvas {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+}

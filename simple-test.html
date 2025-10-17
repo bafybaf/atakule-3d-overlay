@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Text Test</title>
+    <style>
+        body { margin: 0; padding: 20px; font-family: Arial; background: #000; color: white; }
+        canvas { border: 1px solid #333; background: transparent; }
+        .controls { margin: 20px 0; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        button:disabled { background: #666; cursor: not-allowed; }
+        input, select { padding: 5px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>3D Text Direct Render Test</h1>
+    
+    <div class="controls">
+        <input type="text" id="textInput" value="ATAKULE" placeholder="Yazılacak metin">
+        <input type="number" id="fontSize" value="2" min="0.5" max="5" step="0.1">
+        <input type="number" id="rotationSpeed" value="30" min="0" max="100">
+        <button onclick="startRender()">Direct Render (5s)</button>
+        <button onclick="downloadVideo()" id="downloadBtn" disabled>İndir</button>
+    </div>
+    
+    <canvas id="canvas" width="1080" height="1920"></canvas>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        let scene, camera, renderer, textMesh;
+        let animationId;
+        let mediaRecorder;
+        let recordedChunks = [];
+        let downloadUrl = null;
+        
+        // Three.js scene setup
+        function initThreeJS() {
+            const canvas = document.getElementById('canvas');
+            
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = null; // Transparent
+            
+            // Camera
+            camera = new THREE.PerspectiveCamera(35, canvas.width / canvas.height, 0.1, 100);
+            camera.position.set(0, 0, 10);
+            
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: canvas, 
+                alpha: true, 
+                antialias: true,
+                transparent: true
+            });
+            renderer.setSize(canvas.width, canvas.height);
+            renderer.setClearColor(0x000000, 0); // Transparent
+            
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(10, 10, 5);
+            scene.add(directionalLight);
+            
+            // Create 3D text
+            createText();
+            
+            // Start animation
+            animate();
+        }
+        
+        function createText() {
+            if (textMesh) {
+                scene.remove(textMesh);
+            }
+            
+            const text = document.getElementById('textInput').value;
+            const fontSize = parseFloat(document.getElementById('fontSize').value);
+            
+            // Simple 3D text geometry
+            const loader = new THREE.FontLoader();
+            loader.load('https://threejs.org/examples/fonts/helvetiker_regular.typeface.json', function(font) {
+                const geometry = new THREE.TextGeometry(text, {
+                    font: font,
+                    size: fontSize,
+                    height: 0.2,
+                    curveSegments: 12,
+                    bevelEnabled: true,
+                    bevelThickness: 0.03,
+                    bevelSize: 0.02,
+                    bevelOffset: 0,
+                    bevelSegments: 5
+                });
+                
+                const material = new THREE.MeshPhongMaterial({ 
+                    color: 0xff6b35,
+                    transparent: true,
+                    opacity: 0.9
+                });
+                
+                textMesh = new THREE.Mesh(geometry, material);
+                geometry.computeBoundingBox();
+                geometry.translate(
+                    -geometry.boundingBox.max.x * 0.5,
+                    -geometry.boundingBox.max.y * 0.5,
+                    -geometry.boundingBox.max.z * 0.5
+                );
+                
+                scene.add(textMesh);
+            });
+        }
+        
+        function animate() {
+            animationId = requestAnimationFrame(animate);
+            
+            if (textMesh) {
+                const rotationSpeed = parseFloat(document.getElementById('rotationSpeed').value);
+                textMesh.rotation.y += (rotationSpeed * Math.PI / 180) * 0.016; // 60fps
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        function startRender() {
+            const button = event.target;
+            button.disabled = true;
+            button.textContent = 'Rendering...';
+            
+            console.log('🎬 Direct render başlıyor...');
+            
+            // MediaRecorder setup
+            const canvas = document.getElementById('canvas');
+            const stream = canvas.captureStream(30); // 30 FPS
+            
+            let mimeType = 'video/webm;codecs=vp9';
+            if (!MediaRecorder.isTypeSupported(mimeType)) {
+                mimeType = 'video/webm;codecs=vp8';
+            }
+            if (!MediaRecorder.isTypeSupported(mimeType)) {
+                mimeType = 'video/webm';
+            }
+            
+            console.log('📹 MediaRecorder mimeType:', mimeType);
+            
+            mediaRecorder = new MediaRecorder(stream, {
+                mimeType: mimeType,
+                videoBitsPerSecond: 10000000
+            });
+            
+            recordedChunks = [];
+            
+            mediaRecorder.ondataavailable = function(event) {
+                if (event.data.size > 0) {
+                    recordedChunks.push(event.data);
+                }
+            };
+            
+            mediaRecorder.onstop = function() {
+                const blob = new Blob(recordedChunks, { type: mimeType });
+                console.log('✅ Video oluşturuldu:', blob.size, 'bytes');
+                
+                downloadUrl = URL.createObjectURL(blob);
+                document.getElementById('downloadBtn').disabled = false;
+                
+                button.disabled = false;
+                button.textContent = 'Direct Render (5s)';
+            };
+            
+            // Start recording
+            mediaRecorder.start();
+            console.log('📹 Kayıt başladı...');
+            
+            // Stop after 5 seconds
+            setTimeout(() => {
+                console.log('⏹️ Kayıt durduruluyor...');
+                mediaRecorder.stop();
+            }, 5000);
+        }
+        
+        function downloadVideo() {
+            if (downloadUrl) {
+                const link = document.createElement('a');
+                link.href = downloadUrl;
+                link.download = `atakule_3d_${Date.now()}.webm`;
+                link.click();
+            }
+        }
+        
+        // Initialize when page loads
+        window.addEventListener('load', initThreeJS);
+        
+        // Update text when input changes
+        document.getElementById('textInput').addEventListener('input', createText);
+        document.getElementById('fontSize').addEventListener('input', createText);
+    </script>
+</body>
+</html>
