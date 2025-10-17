@@ -241,14 +241,15 @@ Bu proje [MIT Lisansı](LICENSE) ile lisanslanmıştır.
 ## 📞 İletişim
 
 - **GitHub Issues**: [Proje Issues](https://github.com/bafybaf/atakule-3d-overlay/issues)
-- **Email**: bafybaf@example.com
+- **Email**: burakkiziltas@hotmail.com
 
 ## 🔗 Bağlantılar
 
-- **Canlı Demo**: [essizdeneyimlerdunyasi.com](https://www.essizdeneyimlerdunyasi.com)
+- **Canlı Demo**: [atakule.pages.dev](https://atakule.pages.dev)
 - **GitHub Repository**: [atakule-3d-overlay](https://github.com/bafybaf/atakule-3d-overlay)
 - **Documentation**: [Wiki](https://github.com/bafybaf/atakule-3d-overlay/wiki)
 
 ---
 
 ⭐ **Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!**
+
