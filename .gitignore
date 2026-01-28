@@ -1,0 +1,23 @@
+node_modules/
+client-dist/
+.env
+.env.*
+
+# runtime / uploads
+uploads/
+*.log
+
+# local stats/data (persist via volume in production)
+ip-stats.json
+stats.json
+
+# large/binary artifacts
+node_modules.zip
+*.mp4
+*.webm
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
