@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 
 export default defineConfig({
   plugins: [react()],
@@ -15,10 +16,16 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../client-dist',
+    // Coolify static deployments expect build output at /app/dist
+    // Because Vite runs with root=./client, ../dist becomes project-root/dist
+    outDir: '../dist',
     emptyOutDir: true,
     chunkSizeWarningLimit: 2000, // 2MB warning limit
     rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'client', 'index.html'),
+        stats: resolve(__dirname, 'client', 'stats.html'),
+      },
       output: {
         manualChunks: {
           // Three.js ve 3D kütüphanelerini ayrı chunk'a ayır
