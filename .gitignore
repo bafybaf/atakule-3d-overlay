@@ -16,6 +16,9 @@ node_modules.zip
 *.mp4
 *.webm
 
+# keep the default background video in repo (needed in production)
+!client/public/atakule.mp4
+
 # OS/editor
 .DS_Store
 Thumbs.db
