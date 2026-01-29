@@ -33,13 +33,22 @@ async function saveStats(stats) {
   }
 }
 
-// IP adresini al
+// IP adresini al (proxy arkasında gerçek client IP)
 function getClientIP(req) {
-  return req.headers['x-forwarded-for']?.split(',')[0].trim() || 
-         req.headers['x-real-ip'] || 
-         req.connection.remoteAddress || 
-         req.socket.remoteAddress || 
-         'unknown';
+  const raw =
+    req.ip ||
+    req.headers['x-forwarded-for']?.split(',')[0].trim() ||
+    req.headers['x-real-ip'] ||
+    req.headers['cf-connecting-ip'] ||
+    req.headers['true-client-ip'] ||
+    req.connection?.remoteAddress ||
+    req.socket?.remoteAddress ||
+    'unknown';
+  // IPv6-mapped IPv4: ::ffff:10.0.1.1 -> 10.0.1.1
+  if (typeof raw === 'string' && raw.startsWith('::ffff:')) {
+    return raw.slice(7);
+  }
+  return raw;
 }
 
 // Test endpoint
