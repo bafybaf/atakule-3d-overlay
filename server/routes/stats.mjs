@@ -33,21 +33,35 @@ async function saveStats(stats) {
   }
 }
 
-// IP adresini al (proxy arkasında gerçek client IP)
+// Özel (private) IP mi?
+function isPrivateIP(ip) {
+  if (!ip || typeof ip !== 'string') return true;
+  const s = ip.replace(/^::ffff:/i, '').trim();
+  if (/^10\./.test(s) || /^172\.(1[6-9]|2[0-9]|3[01])\./.test(s) || /^192\.168\./.test(s)) return true;
+  if (s === '127.0.0.1' || s === '::1' || s.startsWith('fc') || s.startsWith('fd')) return true;
+  return false;
+}
+
+// IP adresini al (Cloudflare + Coolify/Traefik proxy arkasında gerçek client IP)
 function getClientIP(req) {
-  const raw =
-    req.ip ||
-    req.headers['x-forwarded-for']?.split(',')[0].trim() ||
-    req.headers['x-real-ip'] ||
-    req.headers['cf-connecting-ip'] ||
-    req.headers['true-client-ip'] ||
-    req.connection?.remoteAddress ||
-    req.socket?.remoteAddress ||
-    'unknown';
-  // IPv6-mapped IPv4: ::ffff:10.0.1.1 -> 10.0.1.1
-  if (typeof raw === 'string' && raw.startsWith('::ffff:')) {
-    return raw.slice(7);
+  // Cloudflare gerçek client IP'yi bu header'da gönderir
+  const cf = req.headers['cf-connecting-ip'];
+  if (cf && !isPrivateIP(cf)) return cf.trim();
+
+  const real = req.headers['x-real-ip'];
+  if (real && !isPrivateIP(real)) return real.replace(/^::ffff:/i, '').trim();
+
+  // X-Forwarded-For: soldan ilk public IP'yi al (özel IP'leri atla)
+  const forwarded = req.headers['x-forwarded-for'];
+  if (forwarded) {
+    const list = forwarded.split(',').map((s) => s.trim());
+    const publicIP = list.find((ip) => !isPrivateIP(ip));
+    if (publicIP) return publicIP.replace(/^::ffff:/i, '');
+    if (list.length) return list[list.length - 1].replace(/^::ffff:/i, '');
   }
+
+  const raw = req.ip || req.connection?.remoteAddress || req.socket?.remoteAddress || 'unknown';
+  if (typeof raw === 'string' && raw.startsWith('::ffff:')) return raw.slice(7);
   return raw;
 }
 
