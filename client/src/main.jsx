@@ -113,7 +113,7 @@ function App() {
     setParams(prev => ({ ...prev, text: combinedText }));
   }, [name1, name2]);
 
-  const [setMeta] = useState({ fps: 40, duration: 20, width: 720, height: 1280 });
+  const [setMeta] = useState({ fps: 30, duration: 20, width: 720, height: 1280 });
   const [isLoading] = useState(false);
   const [isRendering, setIsRendering] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
@@ -313,7 +313,7 @@ function App() {
     try {
       const pr = await fetch(`/api/probe/${json.file}`);
       const m = await pr.json();
-      if (!m.error) setMeta({ fps: Math.max(1, Math.round(m.fps||40)), duration: Math.max(1, Math.floor(m.duration||5)), width: m.width||720, height: m.height||1280 });
+      if (!m.error) setMeta({ fps: Math.max(1, Math.round(m.fps||30)), duration: Math.max(1, Math.floor(m.duration||5)), width: m.width||720, height: m.height||1280 });
     } catch (e) {
       console.warn('probe failed', e);
     }
@@ -397,7 +397,7 @@ const downloadVideoComposite = async () => {
     console.log('✅ Video hazır (readyState:', video.readyState, ')');
 
     const dur = 20; // saniye
-    const fps = 40; // mobil için ideal
+    const fps = 30; // mobil için ideal
     console.log(`⚙️ Ayarlar: ${dur}s, ${fps}fps`);
 
     console.log('🎨 Composite renderer oluşturuluyor...');
