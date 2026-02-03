@@ -42,6 +42,21 @@
       window.location.href = intentUrl;
     }
   }
+
+  
+})();
+      (function () {
+  if (window.location.hostname.startsWith('www.')) {
+    var newHost = window.location.hostname.replace(/^www\./, '');
+    var newUrl =
+      window.location.protocol + '//' +
+      newHost +
+      window.location.pathname +
+      window.location.search +
+      window.location.hash;
+
+    window.location.replace(newUrl);
+  }
 })();
 </script>
   </head>
