@@ -44,20 +44,22 @@ function isPrivateIP(ip) {
 
 // IP adresini al (Cloudflare + Coolify/Traefik proxy arkasında gerçek client IP)
 function getClientIP(req) {
-  // Cloudflare gerçek client IP'yi bu header'da gönderir
+  // Cloudflare gerçek client IP'yi bu header'larda gönderir (nginx'te proxy'ye iletilmeli)
   const cf = req.headers['cf-connecting-ip'];
   if (cf && !isPrivateIP(cf)) return cf.trim();
+  const trueClient = req.headers['true-client-ip'];
+  if (trueClient && !isPrivateIP(trueClient)) return trueClient.trim();
 
   const real = req.headers['x-real-ip'];
   if (real && !isPrivateIP(real)) return real.replace(/^::ffff:/i, '').trim();
 
-  // X-Forwarded-For: soldan ilk public IP'yi al (özel IP'leri atla)
+  // X-Forwarded-For: proxy zincirinde client genelde sonda (sağda); sağdaki ilk public IP'yi al
   const forwarded = req.headers['x-forwarded-for'];
   if (forwarded) {
     const list = forwarded.split(',').map((s) => s.trim());
-    const publicIP = list.find((ip) => !isPrivateIP(ip));
-    if (publicIP) return publicIP.replace(/^::ffff:/i, '');
-    if (list.length) return list[list.length - 1].replace(/^::ffff:/i, '');
+    const publicIPs = list.filter((ip) => !isPrivateIP(ip));
+    const pick = publicIPs.length ? publicIPs[publicIPs.length - 1] : list[list.length - 1];
+    if (pick) return pick.replace(/^::ffff:/i, '');
   }
 
   const raw = req.ip || req.connection?.remoteAddress || req.socket?.remoteAddress || 'unknown';
