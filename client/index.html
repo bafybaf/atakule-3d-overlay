@@ -8,18 +8,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&family=Open+Sans:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&family=Montserrat:wght@300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&family=Oswald:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800;900&family=Merriweather:wght@300;400;700;900&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
     <title>Cumhuriyet'e İlanıaşk</title>
     <script>
-      (function() {
-        var ua = navigator.userAgent || '';
-        var inApp = /Instagram|FBAN|FBAV|FBIOS|FB_IAB|TwitterAndroid|TwitteriPhone|TikTok|Snapchat|Line\//i.test(ua);
-        if (!inApp) return;
-        var url = location.href;
-        if (/Android/i.test(ua)) {
-          location.replace('googlechrome://navigate?url=' + encodeURIComponent(url));
-        } else if (/iPhone|iPad|iPod/i.test(ua)) {
-          location.replace('googlechromes://' + encodeURIComponent(url));
-        }
-      })();
-    </script>
+(function() {
+  // Daha önce yönlendirme yapıldı mı kontrol et
+  if (sessionStorage.getItem('igRedirected')) {
+    return;
+  }
+  
+  const userAgent = navigator.userAgent || "";
+  
+  // Instagram tarayıcısı kontrolü
+  const isInstagram = /Instagram/i.test(userAgent);
+  const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+  const isAndroid = /Android/i.test(userAgent);
+  
+  if (isInstagram) {
+    // Yönlendirme yapıldığını işaretle
+    sessionStorage.setItem('igRedirected', 'true');
+    
+    const targetUrl = "https://www.essizdeneyimlerdunyasi.com/";
+    
+    if (isIOS) {
+      // iOS için Safari'de aç
+      window.location.href = `x-safari-${targetUrl}`;
+      
+      // Eğer yukarıdaki çalışmazsa, alternatif yöntem
+      setTimeout(() => {
+        window.location.href = targetUrl;
+      }, 25);
+      
+    } else if (isAndroid) {
+      // Android için doğrudan URL'ye yönlendir (intent kullanmadan)
+      window.location.href = targetUrl;
+    }
+  }
+})();
+</script>
   </head>
   <body>
     <div id="root"></div>
