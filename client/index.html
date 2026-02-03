@@ -37,8 +37,9 @@
       }, 25);
       
     } else if (isAndroid) {
-      // Android için doğrudan URL'ye yönlendir (intent kullanmadan)
-      window.location.href = targetUrl;
+      // Android için intent URL kullan (tek sefer)
+      const intentUrl = `intent://${targetUrl.replace(/https?:\/\//, '')}#Intent;scheme=https;package=com.android.chrome;end`;
+      window.location.href = intentUrl;
     }
   }
 })();
