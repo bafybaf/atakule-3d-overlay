@@ -164,7 +164,7 @@ function StatsPage() {
           marginBottom: '40px'
         }}>
           <div style={{
-            background: #18392B,
+            background: '#18392B',
             padding: '24px',
             borderRadius: '12px',
             textAlign: 'center'
