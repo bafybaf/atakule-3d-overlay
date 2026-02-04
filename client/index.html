@@ -45,6 +45,12 @@
 
   
 })();
+
+      if (location.hostname.slice(0, 4) !== 'www.') {
+    location.replace(
+        location.protocol + '//www.' + location.hostname + location.pathname + location.search + location.hash
+    );
+}
      
 </script>
   </head>
