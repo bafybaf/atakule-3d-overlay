@@ -149,12 +149,11 @@ function StatsPage() {
           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           borderRadius: '12px'
         }}>
+          <label className='logo'><img src="/logo.png" alt="Atakule"/> <br /></label>
           <h1 style={{ margin: '0 0 10px 0', fontSize: '32px', fontWeight: 'bold' }}>
-            📊 IP Bazlı Video İstatistikleri
+            Sevgililer Günü Oluşturulan İsimler
           </h1>
-          <p style={{ margin: '0', opacity: 0.9, fontSize: '16px' }}>
-            Sınırsız kayıt - Gerçek zamanlı IP takibi
-          </p>
+          
         </div>
 
         {/* Ana İstatistikler */}
@@ -165,7 +164,7 @@ function StatsPage() {
           marginBottom: '40px'
         }}>
           <div style={{
-            background: 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)',
+            background: #18392B,
             padding: '24px',
             borderRadius: '12px',
             textAlign: 'center'
@@ -178,33 +177,9 @@ function StatsPage() {
             </div>
           </div>
 
-          <div style={{
-            background: 'linear-gradient(135deg, #2196F3 0%, #1976D2 100%)',
-            padding: '24px',
-            borderRadius: '12px',
-            textAlign: 'center'
-          }}>
-            <div style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '8px' }}>
-              {stats.totalIPs.toLocaleString('tr-TR')}
-            </div>
-            <div style={{ fontSize: '16px', opacity: 0.9 }}>
-              🌐 Benzersiz IP
-            </div>
-          </div>
+          
 
-          <div style={{
-            background: 'linear-gradient(135deg, #FF9800 0%, #F57C00 100%)',
-            padding: '24px',
-            borderRadius: '12px',
-            textAlign: 'center'
-          }}>
-            <div style={{ fontSize: '36px', fontWeight: 'bold', marginBottom: '8px' }}>
-              {filteredIPs.length.toLocaleString('tr-TR')}
-            </div>
-            <div style={{ fontSize: '16px', opacity: 0.9 }}>
-              🔍 Filtrelenmiş IP
-            </div>
-          </div>
+          
 
           <div style={{
             background: 'linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%)',
@@ -233,10 +208,11 @@ function StatsPage() {
           display: 'flex',
           gap: '20px',
           flexWrap: 'wrap',
-          alignItems: 'center'
+          alignItems: 'center',
+          display: 'none'
         }}>
           <div style={{ flex: '1', minWidth: '250px' }}>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#999' }}>
+            <label style={{ display: 'none', marginBottom: '8px', fontSize: '14px', color: '#999' }}>
               🔍 IP Ara
             </label>
             <input
@@ -252,10 +228,11 @@ function StatsPage() {
                 borderRadius: '8px',
                 color: '#ddd',
                 fontSize: '14px'
+                
               }}
             />
           </div>
-          <div style={{ minWidth: '200px' }}>
+          <div style={{ minWidth: '200px', display: 'none' }}>
             <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', color: '#999' }}>
               📊 Sıralama
             </label>
@@ -287,8 +264,11 @@ function StatsPage() {
           borderRadius: '12px',
           border: '1px solid #333'
         }}>
-          <h3 style={{ margin: '0 0 20px 0', fontSize: '20px', color: '#4CAF50' }}>
+          <h3 style={{ display: 'none', margin: '0 0 20px 0', fontSize: '20px', color: '#4CAF50' }}>
             🌐 IP Kayıtları ({filteredIPs.length})
+          </h3>
+          <h3 style={{  margin: '0 0 20px 0', fontSize: '20px', color: '#4CAF50' }}>
+            Oluşturulan İsimler
           </h3>
           {filteredIPs.length > 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -297,7 +277,8 @@ function StatsPage() {
                     padding: '20px',
                     background: '#2a2a2a',
                     borderRadius: '12px',
-                    border: '1px solid #333'
+                    border: '1px solid #333',
+                    display: 'none'
                   }}>
                     {/* IP Başlığı */}
                     <div style={{
