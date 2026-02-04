@@ -146,7 +146,7 @@ function StatsPage() {
           textAlign: 'center',
           marginBottom: '40px',
           padding: '20px',
-          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          background: '#18392B',
           borderRadius: '12px'
         }}>
           <label className='logo'><img src="/logo.png" alt="Atakule"/> <br /></label>
@@ -182,7 +182,7 @@ function StatsPage() {
           
 
           <div style={{
-            background: 'linear-gradient(135deg, #9C27B0 0%, #7B1FA2 100%)',
+            background: '#18392B',
             padding: '24px',
             borderRadius: '12px',
             textAlign: 'center',
@@ -277,8 +277,8 @@ function StatsPage() {
                     padding: '20px',
                     background: '#2a2a2a',
                     borderRadius: '12px',
-                    border: '1px solid #333',
-                    display: 'none'
+                    border: '1px solid #333'
+                    
                   }}>
                     {/* IP Başlığı */}
                     <div style={{
@@ -289,7 +289,7 @@ function StatsPage() {
                       paddingBottom: '12px',
                       borderBottom: '1px solid #444'
                     }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                      <div style={{ display: 'none', alignItems: 'center', gap: '12px' }}>
                         <div style={{
                           width: '32px',
                           height: '32px',
