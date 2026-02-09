@@ -26,7 +26,7 @@ input::placeholder {color: #fff;}
   button{padding:16px 24px;font-size:16px;min-width:100%;}
   .row{flex-direction:column;gap:12px;}
   .logo {position: relative; text-align: center; width: 100%; margin-top: 40px;}
-  .motto {width: 100%;}
+  .motto {width: 100% !important;}
 }
 
 /* Font loading for 3D text - ensure fonts are loaded */
