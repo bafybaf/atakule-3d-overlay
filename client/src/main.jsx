@@ -638,10 +638,7 @@ const downloadVideoComposite = async () => {
     <div className="app">
       
       <div className="left" style={{fontFamily: params.fontFamily}}>
-        <div className="pyro">
-          <div className="before"></div>
-          <div className="after"></div>
-        </div>
+        
         <h3 style={{textAlign:'center',margin:'0 0 10px 0',fontSize:'18px',fontWeight:'600'}}>
           <img src="/motto.webp" alt="Atakule" style={{width:'300px'}}/>
         </h3>
