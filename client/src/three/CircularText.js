@@ -66,7 +66,7 @@ export class CircularText {
       
       // Mavi kalp emojisini tespit et ve mavi renk ver
       if (isBlueHeart) {
-        t.color = '#4A90E2'; // Mavi renk
+        t.color = '#1fc0ff'; // Mavi renk
         // Emoji render için özel ayar yok - troika-three-text varsayılan font ile emoji'leri destekler
         // Emoji'lerin görünmesi için fontSize'u biraz artırabiliriz
         t.fontSize = fontSize * 1.2; // Emoji için biraz daha büyük
