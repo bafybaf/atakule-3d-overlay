@@ -1,7 +1,7 @@
-html,body,#root{height:100%;margin:0;padding:0;background:#0b0b0b;color:#fff;font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; background: url(/bg.webp); background-size: cover; background-position: center; background-repeat: no-repeat;background-attachment: fixed;}
+html,body,#root{height:100%;margin:0;padding:0;background:#0b0b0b;color:#fff;font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; background: url(/bg.webp); background-size: cover; background-position: top; background-repeat: no-repeat;background-attachment: fixed;}
 *{font-family:'Poppins',system-ui,Segoe UI,Roboto,Arial; box-sizing: border-box;}
 .app{display:flex;height:100%;flex-direction:column;align-items: flex-end;}
-.left{width:500px;padding:12px;display:flex;flex-direction:column;gap:8px;align-items:center;box-sizing: border-box; height: 100vh;justify-content:center; margin-right:150px;}
+.left{width:530px;padding:12px;display:flex;flex-direction:column;gap:8px;align-items:center;box-sizing: border-box; height: 100vh;justify-content:center; margin-right:150px;}
 .preview{flex:1;display:flex;align-items:center;justify-content:center;padding:20px; width: 500px; margin-right: 50px;}
 .preview-wrapper{position:relative;width:100%;max-width:360px;height:640px;background:#000;border-radius:8px;overflow:hidden; margin:auto;}
 .preview-wrapper video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
@@ -203,7 +203,7 @@ input::placeholder {color: #fff;}
 
 /* Mobil uyumluluk */
 @media (max-width: 768px) {
-  html,body,#root{background:#0b0b0b;background: #000a12 url(../public/mobil_bg.webp); background-size: cover; background-position: top center; background-repeat: no-repeat;background-attachment:inherit;}
+  html,body,#root{background:#0b0b0b;background: #000a12 url(/mobil_bg.webp); background-size: cover; background-position: top center; background-repeat: no-repeat;background-attachment:inherit;}
   .app{flex-direction:column;}
   .left{width:100%;padding:16px;border-right:none;margin-right:0px; justify-content: flex-start;margin-top: 250px;}
   .preview{padding:16px; width: 100%; margin-right: 0px;}
