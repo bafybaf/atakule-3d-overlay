@@ -749,8 +749,8 @@ const downloadVideoComposite = async () => {
         {(name1.trim() || name2.trim()) && (
           <div style={{
             padding: '12px',
-            backgroundColor: (validateName(name1).isValid && validateName(name2).isValid) ? '#18392B' : '#ffebee',
-            border: (validateName(name1).isValid && validateName(name2).isValid) ? '2px solid #18392B' : '2px solid #f44336',
+            backgroundColor: (validateName(name1).isValid && validateName(name2).isValid) ? '#02172d' : '#ffebee',
+            border: (validateName(name1).isValid && validateName(name2).isValid) ? '2px solid #1fc0ff' : '2px solid #f44336',
             borderRadius: '4px',
             marginBottom: '16px',
             textAlign: 'center',
@@ -815,7 +815,7 @@ const downloadVideoComposite = async () => {
         <label>Sadece Ön Yarım</label>
         <input type="checkbox" checked={params.frontHalfOnly} onChange={e=>setParams(p=>({...p,frontHalfOnly:e.target.checked}))} />
         </div>
-        <label htmlFor="" style={{width:'100%', textAlign:'center', display:'block'}}><img src="/ilaniask.png" alt="Atakule" style={{width:'209px'}}/> <br /></label>
+        <label htmlFor="" style={{width:'100%', textAlign:'center', display:'block'}}><img src="/ilaniask.png" alt="Atakule" style={{width:'279px'}}/> <br /></label>
         <div className="row">
           
         
