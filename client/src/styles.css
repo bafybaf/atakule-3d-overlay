@@ -17,7 +17,7 @@ input::placeholder {color: #fff;}
 
 /* Mobil uyumluluk */
 @media (max-width: 768px) {
-  html,body,#root{background:#0b0b0b;background: #000a12 url(/mobil_bg.webp); background-size: cover; background-position: botton; background-repeat: no-repeat;background-attachment:inherit; height: auto;}
+  html,body,#root{background:#0b0b0b;background: #000a12 url(/mobil_bg.webp); background-size: cover; background-position: bottom center; background-repeat: no-repeat;background-attachment:inherit; height: auto;}
   .app{flex-direction:column;}
   .left{width:100%;padding:16px;border-right:none;margin-right:0px; justify-content: flex-start;margin-top: 250px;}
   .preview{padding:16px; width: 100%; margin-right: 0px;}
