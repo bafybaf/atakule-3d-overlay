@@ -815,7 +815,7 @@ const downloadVideoComposite = async () => {
         <label>Sadece Ön Yarım</label>
         <input type="checkbox" checked={params.frontHalfOnly} onChange={e=>setParams(p=>({...p,frontHalfOnly:e.target.checked}))} />
         </div>
-        <label htmlFor="" style={{width:'100%', textAlign:'center', display:'block'}}><img src="/ilaniask.png" alt="Atakule" style={{width:'279px'}}/> <br /></label>
+        <label htmlFor="" style={{width:'100%', textAlign:'center', display:'block'}}><img src="/ilaniask.png" alt="Atakule" style={{width:'249px'}}/> <br /></label>
         <div className="row">
           
         
