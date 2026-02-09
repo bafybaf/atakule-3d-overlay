@@ -640,17 +640,19 @@ const downloadVideoComposite = async () => {
       <div className="left" style={{fontFamily: params.fontFamily}}>
         
         <h3 style={{textAlign:'center',margin:'0 0 10px 0',fontSize:'18px',fontWeight:'600'}}>
-          <img src="/motto.webp" alt="Atakule" style={{width:'300px'}}/>
+          <img src="/motto.webp" alt="Atakule" style={{width:'400px'}}/>
         </h3>
         
         
         {/* İsim yazma alanı - iki isim girişi */}
         <div style={{marginBottom: '16px'}}>
         <label style={{display: 'block', fontSize: '14px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '10px', marginBottom: '40px', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
-          29 Ekim Cumhuriyet Bayramı'nın coşkusunu kalbimizdeki Cumhuriyet aşkını ilan ederek yaşıyoruz. 
+        Kalbi birbiri için atanlar, 14 Şubat Sevgililer Günü’nü Atakule ile kutluyor. <br />
+        Siz de adınızı ve aşkınızı başkentin zirvesine yazın.
+
           </label>
           <label style={{display: 'block', marginBottom: '20px', fontSize: '14px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '20px', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
-          <strong style={{color: '#a8e7ff'}}>Cumhuriyet'e İlanıaşk</strong> videonuzu oluşturun.
+          <strong style={{color: '#fff'}}>Videonuzu oluşturun.</strong> 
           </label>
           
           {/* Türkçe karakter dönüşümü için özel fonksiyon */}
@@ -713,7 +715,7 @@ const downloadVideoComposite = async () => {
                   minWidth: '40px',
                   height: '40px',
                 }}>
-                  💙
+                  <img src="/kalp.png" alt="Atakule" style={{width:'25px'}}/>
                 </div>
                 
                 {/* İkinci isim girişi */}
@@ -738,9 +740,7 @@ const downloadVideoComposite = async () => {
             );
           })()}
           
-          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '10px'}}>
-            <img src="/cumhuriyet.webp" alt="Atakule" style={{width:'150px'}}/>
-          </div>
+          
         </div>
         
 
@@ -815,7 +815,7 @@ const downloadVideoComposite = async () => {
         <label>Sadece Ön Yarım</label>
         <input type="checkbox" checked={params.frontHalfOnly} onChange={e=>setParams(p=>({...p,frontHalfOnly:e.target.checked}))} />
         </div>
-        <label htmlFor="" style={{width:'100%', textAlign:'center', display:'block'}}><img src="/ilaniask.png" alt="Atakule" style={{width:'150px'}}/> <br /></label>
+        <label htmlFor="" style={{width:'100%', textAlign:'center', display:'block'}}><img src="/ilaniask.png" alt="Atakule" style={{width:'209px'}}/> <br /></label>
         <div className="row">
           
         
@@ -1153,5 +1153,3 @@ const downloadVideoComposite = async () => {
 }
 
 createRoot(document.getElementById('root')).render(<App />);
-
-
