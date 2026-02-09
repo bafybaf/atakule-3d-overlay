@@ -17,7 +17,7 @@ input::placeholder {color: #fff;}
 
 /* Mobil uyumluluk */
 @media (max-width: 768px) {
-  html,body,#root{background:#0b0b0b;background: #000a12 url(/mobil_bg.webp); background-size: cover; background-position: top center; background-repeat: no-repeat;background-attachment:inherit;}
+  html,body,#root{background:#0b0b0b;background: #000a12 url(/mobil_bg.webp); background-size: cover; background-position: botton; background-repeat: no-repeat;background-attachment:inherit; height: auto;}
   .app{flex-direction:column;}
   .left{width:100%;padding:16px;border-right:none;margin-right:0px; justify-content: flex-start;margin-top: 250px;}
   .preview{padding:16px; width: 100%; margin-right: 0px;}
@@ -26,6 +26,7 @@ input::placeholder {color: #fff;}
   button{padding:16px 24px;font-size:16px;min-width:100%;}
   .row{flex-direction:column;gap:12px;}
   .logo {position: relative; text-align: center; width: 100%; margin-top: 40px;}
+  .motto {width: 100%;}
 }
 
 /* Font loading for 3D text - ensure fonts are loaded */
