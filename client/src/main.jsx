@@ -640,7 +640,7 @@ const downloadVideoComposite = async () => {
       <div className="left" style={{fontFamily: params.fontFamily}}>
         
         <h3 style={{textAlign:'center',margin:'0 0 10px 0',fontSize:'18px',fontWeight:'600'}}>
-          <img src="/motto.webp" alt="Atakule" style={{width:'400px'}}/>
+          <img src="/motto.webp" alt="Atakule" className='motto' style={{width:'400px'}}/>
         </h3>
         
         
