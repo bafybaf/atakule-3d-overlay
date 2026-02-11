@@ -61,3 +61,11 @@ canvas {
   background-color: transparent !important;
   background-image: none !important;
 }
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
