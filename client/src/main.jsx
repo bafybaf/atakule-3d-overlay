@@ -633,11 +633,11 @@ const downloadVideoComposite = async () => {
         
         {/* Tek isim + kırmızı kalp + sabit CUMHURİYET */}
         <div style={{marginBottom: '16px'}}>
-        <label style={{display: 'block', fontSize: '18px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '10px', marginBottom: '28px', lineHeight: '1.45', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
+        <label className="hero-copy" style={{display: 'block', fontSize: '18px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '10px', marginBottom: '28px', lineHeight: '1.45', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
           29 Ekim Cumhuriyet Bayramı’nın coşkusunu<br />
           kalbimizdeki Cumhuriyet aşkını ilan ederek yaşıyoruz.
         </label>
-        <label style={{display: 'block', marginBottom: '20px', fontSize: '18px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '8px', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
+        <label className="hero-copy" style={{display: 'block', marginBottom: '20px', fontSize: '18px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '8px', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
           <strong style={{color: '#5ec8f0', fontWeight: '600'}}>Cumhuriyet’e ilanıaşk</strong> videonuzu oluşturun.
         </label>
           
