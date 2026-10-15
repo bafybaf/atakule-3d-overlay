@@ -294,6 +294,7 @@ function StatsPage() {
               onClick={resetStats}
               disabled={resetting}
               style={{
+                display: 'none',
                 background: 'transparent',
                 color: '#f44336',
                 border: '1px solid #f44336',
