@@ -12,6 +12,7 @@ function StatsPage() {
   const [error, setError] = useState(null);
   const [searchIP, setSearchIP] = useState('');
   const [sortBy, setSortBy] = useState('total'); // 'total', 'lastSeen', 'ip'
+  const [resetting, setResetting] = useState(false);
 
   useEffect(() => {
     fetchStats();
@@ -39,6 +40,23 @@ function StatsPage() {
       console.error('Stats fetch error:', err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const resetStats = async () => {
+    if (!window.confirm('Tüm Cumhuriyet\'e ilanıaşk kayıtları silinecek. Emin misiniz?')) return;
+    try {
+      setResetting(true);
+      setError(null);
+      const response = await fetch('/api/stats/reset', { method: 'DELETE' });
+      if (!response.ok) {
+        throw new Error('İstatistikler sıfırlanamadı');
+      }
+      await fetchStats();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setResetting(false);
     }
   };
 
@@ -151,7 +169,7 @@ function StatsPage() {
         }}>
           <label className='logo'><img src="/logo.png" alt="Atakule"/> <br /></label>
           <h1 style={{ margin: '0 0 10px 0', fontSize: '32px', fontWeight: 'bold' }}>
-            Sevgililer Günü Oluşturulan İsimler
+            Cumhuriyet’e İlanıaşk İsimleri
           </h1>
           
         </div>
@@ -173,7 +191,7 @@ function StatsPage() {
               {stats.totalRequests.toLocaleString('tr-TR')}
             </div>
             <div style={{ fontSize: '16px', opacity: 0.9 }}>
-              📥 Toplam İstek
+              Toplam ilanıaşk
             </div>
           </div>
 
@@ -267,9 +285,27 @@ function StatsPage() {
           <h3 style={{ display: 'none', margin: '0 0 20px 0', fontSize: '20px', color: '#4CAF50' }}>
             🌐 IP Kayıtları ({filteredIPs.length})
           </h3>
-          <h3 style={{  margin: '0 0 20px 0', fontSize: '20px', color: '#4CAF50' }}>
-            Oluşturulan İsimler
-          </h3>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', marginBottom: '20px', flexWrap: 'wrap' }}>
+            <h3 style={{ margin: 0, fontSize: '20px', color: '#4CAF50' }}>
+              İlan edilen isimler
+            </h3>
+            <button
+              type="button"
+              onClick={resetStats}
+              disabled={resetting}
+              style={{
+                background: 'transparent',
+                color: '#f44336',
+                border: '1px solid #f44336',
+                padding: '10px 16px',
+                borderRadius: '8px',
+                cursor: resetting ? 'wait' : 'pointer',
+                fontWeight: '600'
+              }}
+            >
+              {resetting ? 'Sıfırlanıyor...' : 'İstatistikleri sıfırla'}
+            </button>
+          </div>
           {filteredIPs.length > 0 ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                 {filteredIPs.map((record, index) => (
@@ -326,7 +362,7 @@ function StatsPage() {
                     
                     {/* İsim Listesi */}
                     <div style={{ fontSize: '14px', color: '#999', marginBottom: '8px' }}>
-                      Kullanılan isimler:
+                      İlan edilen isimler:
                     </div>
                     <div style={{
                       display: 'grid',
@@ -364,9 +400,9 @@ function StatsPage() {
             ) : (
               <div style={{ color: '#888', textAlign: 'center', padding: '40px' }}>
                 <div style={{ fontSize: '48px', marginBottom: '16px' }}>📭</div>
-                <div style={{ fontSize: '16px' }}>Henüz IP kaydı yok</div>
+                <div style={{ fontSize: '16px' }}>Henüz ilan edilen isim yok</div>
                 <div style={{ fontSize: '14px', marginTop: '8px', opacity: 0.7 }}>
-                  Video indirmeleri otomatik olarak kaydedilecek
+                  İndirilen videolar burada görünecek
                 </div>
               </div>
             )}
