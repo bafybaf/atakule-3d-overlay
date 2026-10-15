@@ -46,11 +46,15 @@
   
 })();
 
-      if (location.hostname.slice(0, 4) !== 'www.') {
-    location.replace(
-        location.protocol + '//www.' + location.hostname + location.pathname + location.search + location.hash
-    );
-}
+(function () {
+  const host = location.hostname;
+  if (host === 'localhost' || host === '127.0.0.1' || host === '::1') return;
+  if (host.slice(0, 4) === 'www.') return;
+  const port = location.port ? ':' + location.port : '';
+  location.replace(
+    location.protocol + '//www.' + host + port + location.pathname + location.search + location.hash
+  );
+})();
      
 </script>
   </head>

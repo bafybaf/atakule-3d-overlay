@@ -50,23 +50,20 @@ export class CircularText {
     const center = new THREE.Vector3(0,0,0);
     const mat = new THREE.Matrix4();
     
-    // Mavi kalp emojisi
-    const blueHeart = '💙';
+    const heart = '❤';
     
     for (let i=0;i<total;i++) {
       const angle = i * step;
       const t = this.chars[i];
       const char = chars[i]; // Spread operator ile doğru parse edilmiş karakter
       
-      // Mavi kalp emojisini tespit et
-      const isBlueHeart = char === blueHeart;
+      const isHeart = char === heart;
       
       t.text = char;
       t.fontSize = fontSize;
       
-      // Mavi kalp emojisini tespit et ve mavi renk ver
-      if (isBlueHeart) {
-        t.color = '#1fc0ff'; // Mavi renk
+      if (isHeart) {
+        t.color = '#E30A17';
         // Emoji render için özel ayar yok - troika-three-text varsayılan font ile emoji'leri destekler
         // Emoji'lerin görünmesi için fontSize'u biraz artırabiliriz
         t.fontSize = fontSize * 1.2; // Emoji için biraz daha büyük

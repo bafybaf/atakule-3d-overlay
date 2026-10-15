@@ -26,13 +26,11 @@ export class TextManager {
     const raw = (p.text && p.text.length > 0) ? p.text : ' ';
     const content = p.reverseText ? [...raw].reverse().join('') : raw;
     
-    // Mavi kalp emojisini (💙) tespit et - emoji'yi doğru şekilde kontrol et
-    const blueHeart = '💙';
-    // Emoji'yi spread operator ile parse et ve kontrol et
+    const heart = '❤';
     const contentChars = [...content];
-    const hasBlueHeart = contentChars.includes(blueHeart);
+    const hasHeart = contentChars.includes(heart);
     
-    if (!hasBlueHeart) {
+    if (!hasHeart) {
       // Kalp yok, normal render
       this.textMesh.text = content;
       this.textMesh.fontSize = p.fontSize || 1;
@@ -61,7 +59,7 @@ export class TextManager {
     const fontSize = p.fontSize || 1;
     const letterSpacing = p.letterSpacing ?? 0;
     const baseColor = p.color || '#ffffff';
-    const blueColor = '#4A90E2'; // Mavi renk
+    const heartColor = '#E30A17';
     
     // Eski ekstra mesh'leri temizle
     while (this.group.children.length > 1) {
@@ -79,7 +77,7 @@ export class TextManager {
     // Her karakter için mesh oluştur
     for (let i = 0; i < contentChars.length; i++) {
       const char = contentChars[i];
-      const isBlueHeart = char === blueHeart;
+      const isHeart = char === heart;
       
       const charMesh = i === 0 ? this.textMesh : new Text();
       if (i > 0) {
@@ -93,13 +91,12 @@ export class TextManager {
       
       charMesh.text = char;
       
-      if (isBlueHeart) {
-        // Kalp emojisi için özel ayarlar
-        charMesh.fontSize = fontSize * 1.8; // Daha küçük kalp
+      if (isHeart) {
+        charMesh.fontSize = fontSize * 1.8;
         charMesh.letterSpacing = 0;
-        charMesh.color = blueColor;
+        charMesh.color = heartColor;
         charMesh.outlineWidth = '3%';
-        charMesh.outlineColor = blueColor;
+        charMesh.outlineColor = heartColor;
         // Kalp için genişlik - diğer karakterlerle aynı aralık
         charMesh.position.x = currentX;
         charMesh.position.y = 0;

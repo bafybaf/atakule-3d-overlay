@@ -11,7 +11,7 @@ import { fixWebmDuration } from '@fix-webm-duration/fix';
 function App() {
   const [videoFile, setVideoFile] = useState('');
   const [params, setParams] = useState({
-    text: '❤️',
+    text: '❤ CUMHURİYET',
     fontSize: 0.45,
     letterSpacing: 0, // Sabit harf aralığı için 0
     color: '#ffffff',
@@ -31,9 +31,9 @@ function App() {
     frontHalfOnly: true,
   });
   
-  // Yeni state'ler - iki isim girişi
-  const [name1, setName1] = useState('');
-  const [name2, setName2] = useState('');
+  const HEART = '❤';
+  const FIXED_LABEL = 'CUMHURİYET';
+  const [name, setName] = useState('');
     
   // Türkçe isim veritabanı
   const turkishNames = [
@@ -91,27 +91,18 @@ function App() {
     return { isValid: true, message: 'Geçerli isim' };
   };
   
-  // İki isim + mavi kalp birleştirme fonksiyonu
   const getCombinedText = () => {
-    const validation1 = validateName(name1);
-    const validation2 = validateName(name2);
-    
-    // Her iki isim de geçerliyse birleştir
-    if (validation1.isValid && validation2.isValid) {
-      const n1 = name1.trim();
-      const n2 = name2.trim();
-      return n1 && n2 ? `            ${n1} 💙 ${n2}            ` : (n1 ? `${n1} 💙` : (n2 ? `💙 ${n2}` : '💙'));
+    const validation = validateName(name);
+    if (validation.isValid) {
+      return `            ${name.trim()} ${HEART} ${FIXED_LABEL}            `;
     }
-    
-    // Geçersiz isim durumunda varsayılan metin
-    return '💙';
+    return `${HEART} ${FIXED_LABEL}`;
   };
   
-  // İsimler değiştiğinde params.text'i güncelle
   useEffect(() => {
     const combinedText = getCombinedText();
     setParams(prev => ({ ...prev, text: combinedText }));
-  }, [name1, name2]);
+  }, [name]);
 
   const [setMeta] = useState({ fps: 30, duration: 20, width: 720, height: 1280 });
   const [isLoading] = useState(false);
@@ -345,17 +336,13 @@ const downloadVideoComposite = async () => {
 
   console.log('🎬 Composite video kayıt işlemi başladı');
 
-  const name1Validation = validateName(name1);
-  const name2Validation = validateName(name2);
-  if (!name1Validation.isValid || !name2Validation.isValid) {
-    const errors = [];
-    if (!name1Validation.isValid) errors.push(`İlk isim: ${name1Validation.message}`);
-    if (!name2Validation.isValid) errors.push(`İkinci isim: ${name2Validation.message}`);
-    console.log('❌ İsim validasyonu başarısız:', errors.join(' | '));
-    alert(`❌ ${errors.join('\n')}`);
+  const nameValidation = validateName(name);
+  if (!nameValidation.isValid) {
+    console.log('❌ İsim validasyonu başarısız:', nameValidation.message);
+    alert(`❌ ${nameValidation.message}`);
     return;
   }
-  console.log('✅ İsim validasyonu başarılı:', name1, '💙', name2);
+  console.log('✅ İsim validasyonu başarılı:', name, HEART, FIXED_LABEL);
 
   setIsRendering(true);
   setVideoReady(false);
@@ -603,7 +590,7 @@ const downloadVideoComposite = async () => {
 
     console.log('🔗 Download URL oluşturuluyor...');
     const videoUrl = URL.createObjectURL(videoBlob);
-    const fileName = `atakule_${name1}_${name2}_${Date.now()}${fileExtension}`;
+    const fileName = `atakule_${name}_${Date.now()}${fileExtension}`;
     
     setDownloadUrl(videoUrl);
     setCurrentFileName(fileName);
@@ -644,16 +631,15 @@ const downloadVideoComposite = async () => {
         </h3>
         
         
-        {/* İsim yazma alanı - iki isim girişi */}
+        {/* Tek isim + kırmızı kalp + sabit CUMHURİYET */}
         <div style={{marginBottom: '16px'}}>
-        <label style={{display: 'block', fontSize: '14px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '10px', marginBottom: '40px', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
-        Kalbi birbiri için atanlar, 14 Şubat Sevgililer Günü’nü Atakule ile kutluyor. <br />
-        Siz de adınızı ve aşkınızı başkentin zirvesine yazın.
-
-          </label>
-          <label style={{display: 'block', marginBottom: '20px', fontSize: '14px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '20px', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
-          <strong style={{color: '#fff'}}>Videonuzu oluşturun.</strong> 
-          </label>
+        <label style={{display: 'block', fontSize: '18px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '10px', marginBottom: '28px', lineHeight: '1.45', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
+          29 Ekim Cumhuriyet Bayramı’nın coşkusunu<br />
+          kalbimizdeki Cumhuriyet aşkını ilan ederek yaşıyoruz.
+        </label>
+        <label style={{display: 'block', marginBottom: '20px', fontSize: '18px', fontWeight: '500', color: '#fff', textAlign: 'center', marginTop: '8px', textShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>
+          <strong style={{color: '#5ec8f0', fontWeight: '600'}}>Cumhuriyet’e ilanıaşk</strong> videonuzu oluşturun.
+        </label>
           
           {/* Türkçe karakter dönüşümü için özel fonksiyon */}
           {(() => {
@@ -686,56 +672,25 @@ const downloadVideoComposite = async () => {
             
             return (
               <div style={{display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px'}}>
-                {/* İlk isim girişi */}
                 <input 
-                  value={name1} 
-                  onChange={e => handleNameChange(e.target.value, setName1)}
-                  placeholder="İlk İsmi Girin"
+                  value={name} 
+                  onChange={e => handleNameChange(e.target.value, setName)}
+                  placeholder="İsminizi Girin"
                   style={{
                     flex: 1,
                     padding: '8px 12px',
                     fontSize: '16px',
-                    border: validateName(name1).isValid || !name1.trim() ? '1px solid #ddd' : '1px solid #f44336',
+                    border: validateName(name).isValid || !name.trim() ? '1px solid #ddd' : '1px solid #f44336',
                     borderRadius: '4px',
                     textAlign: 'center',
                     boxSizing: 'border-box',
                     color: '#fff',
-                    backgroundColor: validateName(name1).isValid || !name1.trim() ? 'rgba(255,255,255,0.1)' : 'rgba(244,67,54,0.2)',
+                    backgroundColor: validateName(name).isValid || !name.trim() ? 'rgba(255,255,255,0.1)' : 'rgba(244,67,54,0.2)',
                     fontFamily: '"Poppins", system-ui, Segoe UI, Roboto, Arial'
                   }}
                 />
                 
-                {/* Mavi kalp emojisi */}
-                <div style={{
-                  fontSize: '28px',
-                  lineHeight: '1',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  minWidth: '40px',
-                  height: '40px',
-                }}>
-                  <img src="/kalp.png" alt="Atakule" style={{width:'25px'}}/>
-                </div>
-                
-                {/* İkinci isim girişi */}
-                <input 
-                  value={name2} 
-                  onChange={e => handleNameChange(e.target.value, setName2)}
-                  placeholder="İkinci İsmi Girin"
-                  style={{
-                    flex: 1,
-                    padding: '8px 12px',
-                    fontSize: '16px',
-                    border: validateName(name2).isValid || !name2.trim() ? '1px solid #ddd' : '1px solid #f44336',
-                    borderRadius: '4px',
-                    textAlign: 'center',
-                    boxSizing: 'border-box',
-                    color: '#fff',
-                    backgroundColor: validateName(name2).isValid || !name2.trim() ? 'rgba(255,255,255,0.1)' : 'rgba(244,67,54,0.2)',
-                    fontFamily: '"Poppins", system-ui, Segoe UI, Roboto, Arial'
-                  }}
-                />
+                <img src="/ilaniask.png" alt="Cumhuriyet'e ilanıaşk" style={{height: '32px', width: 'auto', maxWidth: '48%', objectFit: 'contain', flex: '0 1 auto'}} />
               </div>
             );
           })()}
@@ -746,37 +701,34 @@ const downloadVideoComposite = async () => {
 
         
         {/* Önizleme */}
-        {(name1.trim() || name2.trim()) && (
+        {name.trim() && (
           <div style={{
             padding: '12px',
-            backgroundColor: (validateName(name1).isValid && validateName(name2).isValid) ? '#02172d' : '#ffebee',
-            border: (validateName(name1).isValid && validateName(name2).isValid) ? '2px solid #1fc0ff' : '2px solid #f44336',
+            backgroundColor: validateName(name).isValid ? '#02172d' : '#ffebee',
+            border: validateName(name).isValid ? '2px solid #E30A17' : '2px solid #f44336',
             borderRadius: '4px',
             marginBottom: '16px',
             textAlign: 'center',
             fontSize: '14px',
             fontWeight: '500',
-            color: (validateName(name1).isValid && validateName(name2).isValid) ? '#2e7d32' : '#d32f2f'
+            color: validateName(name).isValid ? '#ffffff' : '#d32f2f'
           }}>
-            {(validateName(name1).isValid && validateName(name2).isValid) ? (
+            {validateName(name).isValid ? (
               <>
                 <div style={{color: '#fff', fontWeight: 'bold', marginBottom: '4px'}}>
-                  ✅ Her iki isim de geçerli
+                  İsim geçerli
                 </div>
                 <div style={{fontSize: '12px', color: '#fff'}}>
-                  Önizleme: {getCombinedText()}
+                  Önizleme: {name.trim()} {HEART} {FIXED_LABEL}
                 </div>
               </>
             ) : (
               <>
                 <div style={{color: '#d32f2f', fontWeight: 'bold', marginBottom: '4px'}}>
-                  ⚠️ {!validateName(name1).isValid && name1.trim() ? `İlk isim: ${validateName(name1).message}` : ''}
-                  {!validateName(name1).isValid && !validateName(name2).isValid && name1.trim() && name2.trim() ? ' | ' : ''}
-                  {!validateName(name2).isValid && name2.trim() ? `İkinci isim: ${validateName(name2).message}` : ''}
-                  {(!name1.trim() || !name2.trim()) && (!validateName(name1).isValid || !validateName(name2).isValid) ? 'Lütfen her iki ismi de geçerli şekilde girin.' : ''}
+                  {validateName(name).message}
                 </div>
                 <div style={{fontSize: '12px'}}>
-                  {!name1.trim() && !name2.trim() ? 'Her iki ismi de girin.' : 'Geçerli isimler girin.'}
+                  Geçerli bir isim girin.
                 </div>
               </>
             )}
@@ -815,15 +767,14 @@ const downloadVideoComposite = async () => {
         <label>Sadece Ön Yarım</label>
         <input type="checkbox" checked={params.frontHalfOnly} onChange={e=>setParams(p=>({...p,frontHalfOnly:e.target.checked}))} />
         </div>
-        <label htmlFor="" style={{width:'100%', textAlign:'center', display:'block'}}><img src="/ilaniask.png" alt="Atakule" style={{width:'249px'}}/> <br /></label>
         <div className="row">
           
         
         <button 
           onClick={downloadVideoComposite} 
-          disabled={isRendering || !validateName(name1).isValid || !validateName(name2).isValid}
+          disabled={isRendering || !validateName(name).isValid}
           style={{
-            background: (isRendering || !validateName(name1).isValid || !validateName(name2).isValid) ? '#ffffff00' : '#00000059',
+            background: (isRendering || !validateName(name).isValid) ? '#ffffff00' : '#00000059',
             color: 'white',
             fontWeight: '600',
             fontSize: '16px',
@@ -891,7 +842,7 @@ const downloadVideoComposite = async () => {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ 
-                    name: (name1 && name2) ? `${name1} 💙 ${name2}` : (name1 || name2 || 'Anonim')
+                    name: validateName(name).isValid ? `${name.trim()} ${HEART} ${FIXED_LABEL}` : 'Anonim'
                   }),
                 }).catch(error => {
                 });
@@ -927,7 +878,7 @@ const downloadVideoComposite = async () => {
             <button 
               onClick={() => {
                 const shareUrl = window.location.href;
-                const combinedNames = (name1 && name2) ? `${name1} 💙 ${name2}` : (name1 || name2 || '');
+                const combinedNames = validateName(name).isValid ? `${name.trim()} ${HEART} ${FIXED_LABEL}` : '';
                 const shareText = `${combinedNames ? combinedNames + ' ' : ''} Cumhuriyet'e İlanıaşk`;
                 
                 if (navigator.share) {
